@@ -1,0 +1,191 @@
+@font-face {
+    font-family: "UberMoveText";
+    src: url("../assets/fonts/UberMoveTextRegular.otf");
+}
+
+@font-face {
+    font-family: "UberMoveMedium";
+    src: url("../assets/fonts/UberMoveMedium.otf");
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "UberMoveMedium", sans-serif;
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+}
+
+.header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.header__heading {
+    font-size: 40px;
+}
+
+.header__para {
+    font-size: 20px;
+    color: rgb(130, 130, 130);
+}
+
+.form-container {
+    padding: 5px;
+    display: flex;
+    gap: 50px;
+}
+
+.form-info {
+    background-color: rgb(33, 33, 55);
+    color: rgb(221, 221, 221);
+    max-width: 270px;
+    padding: 30px 40px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-info__main {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.form-info__main__header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-info__heading {
+    font-size: 25px;
+}
+
+.form-info__para {
+    font-size: 15px;
+    color: rgb(170, 164, 194);
+}
+
+.form-info__main__reach-out-options {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-info__reach-out-option {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.form-info__footer {
+    display: flex;
+    gap: 25px;
+}
+
+.form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 0;
+}
+
+.form__row-group {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.form__group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form__label {
+    font-size: 12px;
+}
+
+.form__input,
+.form__textarea {
+    padding: 10px 0;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    font-size: 15px;
+}
+
+.form__textarea {
+    font-family: UberMoveMedium, sans-serif;
+    resize: vertical;
+}
+
+.form__textarea::placeholder,
+.form__input::placeholder {
+    color: rgb(195, 195, 195);
+    font-size: 14px;
+}
+
+.form__input:focus,
+.form__textarea:focus {
+    border-bottom: 1px solid rgb(60, 60, 85);
+}
+
+.form__website-type-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form__website-type-radios {
+    display: flex;
+    gap: 25px;
+}
+
+.form__radio-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.form__message-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form__submit {
+    align-self: flex-end;
+    border: none;
+    background-color: rgb(60, 60, 85);
+    color: rgb(221, 221, 221);
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form__submit:hover {
+    background-color: rgb(70, 70, 95);
+}

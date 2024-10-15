@@ -3,12 +3,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
+require 'utils.php';
 
-function sendEmail($to, $subject, $htmlBody, $altBody = "AltBody") {
+function sendEmail($message, $email, $phone, $first_name, $last_name, $website_type) {
     $mail = new PHPMailer(true);
     
     try {
-        $mail->SMTPDebug = 2;
         $mail->isSMTP();
         $mail->Host = 'smtp.sendgrid.net';
         $mail->SMTPAuth = true;
@@ -18,14 +18,18 @@ function sendEmail($to, $subject, $htmlBody, $altBody = "AltBody") {
         $mail->Port = 587;
 
         $mail->setFrom('alanrejnowicz281@gmail.com', 'Alan');
-        $mail->addAddress($to);
+        $mail->addAddress($email);
 
         $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $htmlBody;
-        $mail->AltBody = $altBody;
+
+        $formattedMail = formatMail($message,  $phone, $first_name, $last_name, $website_type);
+
+        $mail->Subject = $formattedMail['subject'];
+        $mail->Body = $formattedMail['htmlBody'];
+        $mail->AltBody = $formattedMail['altBody'];
 
         $mail->send();
+        
         return "Mail has been sent successfully!";
     } catch (Exception $e) {
         return "Message could not be sent. Error: {$mail->ErrorInfo}";
