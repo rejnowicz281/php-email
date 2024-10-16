@@ -2,12 +2,12 @@
 require "send.php";
 
 if(isset($_POST['message']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['website-type'])) {
-    $message = $_POST['message'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $first_name = $_POST['first-name'];
-    $last_name = $_POST['last-name'];
-    $website_type = $_POST['website-type'];
+    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
+    $first_name = htmlspecialchars($_POST['first-name'], ENT_QUOTES, 'UTF-8');
+    $last_name = htmlspecialchars($_POST['last-name'], ENT_QUOTES, 'UTF-8');
+    $website_type = htmlspecialchars($_POST['website-type'], ENT_QUOTES, 'UTF-8');
+    $phone = htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8');
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
     $result = sendEmail($message, $email, $phone, $first_name, $last_name, $website_type);
 }
@@ -78,26 +78,26 @@ if(isset($_POST['message']) && isset($_POST['email']) && isset($_POST['phone']) 
             <form class="form" method="POST">
                 <div class="form__row-group">
                     <div class="form__group">
-                        <label for="first-name" class="form__label">First Name</label>
-                        <input placeholder="John" name="first-name" type="text" id="first-name" class="form__input"
-                            required>
+                        <label for="first-name" id="first-name-label" class="form__label">First Name</label>
+                        <input required placeholder="John" name="first-name" type="text" id="first-name"
+                            class="form__input">
                     </div>
                     <div class="form__group">
-                        <label for="last-name" class="form__label">Last Name</label>
-                        <input placeholder="Doe" name="last-name" type="text" id="last-name" class="form__input"
-                            required>
+                        <label for="last-name" id="last-name-label" class="form__label">Last Name</label>
+                        <input required placeholder="Doe" name="last-name" type="text" id="last-name"
+                            class="form__input">
                     </div>
                 </div>
                 <div class="form__row-group">
                     <div class="form__group">
-                        <label for="email" class="form__label">Email</label>
-                        <input placeholder="john@doe.com" name="email" type="email" id="email" class="form__input"
-                            required>
+                        <label for="email" id="email-label" class="form__label">Email</label>
+                        <input required placeholder="john@doe.com" name="email" type="email" id="email"
+                            class="form__input">
                     </div>
                     <div class="form__group">
-                        <label for="phone" class="form__label">Phone</label>
-                        <input placeholder="+123 456 789" name="phone" type="tel" id="phone" class="form__input"
-                            required>
+                        <label for="phone" id="phone-label" class="form__label">Phone</label>
+                        <input required placeholder="+123 456 789" name="phone" type="tel" id="phone"
+                            class="form__input">
                     </div>
                 </div>
                 <div class="form__website-type-section">
@@ -107,32 +107,34 @@ if(isset($_POST['message']) && isset($_POST['email']) && isset($_POST['phone']) 
 
                     <div class="form__website-type-radios">
                         <div class="form__radio-group">
-                            <input type="radio" id="web-design" name="website-type" value="Web Design">
+                            <input required type="radio" id="web-design" name="website-type" value="Web Design">
                             <label for="web-design">Web Design</label>
                         </div>
                         <div class="form__radio-group">
-                            <input type="radio" id="web-development" name="website-type" value="Web Development">
+                            <input required type="radio" id="web-development" name="website-type"
+                                value="Web Development">
                             <label for="web-development">Web Development</label>
                         </div>
                         <div class="form__radio-group">
-                            <input type="radio" id="logo-design" name="website-type" value="Logo Design">
+                            <input required type="radio" id="logo-design" name="website-type" value="Logo Design">
                             <label for="logo-design">Logo Design</label>
                         </div>
                         <div class="form__radio-group">
-                            <input type="radio" id="other" name="website-type" value="Other">
+                            <input required type="radio" id="other" name="website-type" value="Other">
                             <label for="other">Other</label>
                         </div>
                     </div>
                 </div>
                 <div class="form__message-group">
-                    <label for="message" class="form__label">Message</label>
-                    <textarea placeholder="Write your message..." name="message" id="message" class="form__textarea"
-                        required></textarea>
+                    <label for="message" id="message-label" class="form__label">Message</label>
+                    <textarea required placeholder="Write your message..." name="message" id="message"
+                        class="form__textarea"></textarea>
                 </div>
                 <button type="submit" class="form__submit">Send Message</button>
             </form>
         </div>
     </div>
+    <script src="js/validation.js"></script>
 </body>
 
 </html>
