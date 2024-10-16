@@ -1,15 +1,20 @@
 <?php
-require "send.php";
+require_once "send.php";
+require_once "utils.php";
 
 if(isset($_POST['message']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['website-type'])) {
-    $message = htmlspecialchars($_POST['message'], ENT_QUOTES, 'UTF-8');
-    $first_name = htmlspecialchars($_POST['first-name'], ENT_QUOTES, 'UTF-8');
-    $last_name = htmlspecialchars($_POST['last-name'], ENT_QUOTES, 'UTF-8');
-    $website_type = htmlspecialchars($_POST['website-type'], ENT_QUOTES, 'UTF-8');
-    $phone = htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8');
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $message = validateText($_POST['message']);
+    $first_name =  validateText($_POST['first-name']);
+    $last_name = validateText($_POST['last-name']);
+    $website_type = validateText($_POST['website-type']);
+    $phone = validateText($_POST['phone']);
+    $email = validateEmail($_POST['email']);
 
-    $result = sendEmail($message, $email, $phone, $first_name, $last_name, $website_type);
+    if (!$message || !$first_name || !$last_name || !$website_type || !$phone || !$email) {
+        $result = "Please fill in all the fields correctly.";
+    } else{
+        $result = sendEmail($message, $email, $phone, $first_name, $last_name, $website_type);
+    }
 }
 ?>
 
@@ -30,7 +35,7 @@ if(isset($_POST['message']) && isset($_POST['email']) && isset($_POST['phone']) 
             <h1 class="header__heading">Contact Us</h1>
             <p class="header__para">
                 <?php 
-                if(isset($result)) {
+                if (isset($result)) {
                     echo $result;
                 } else {
                     echo "Any question or remarks? Just write us a message!";

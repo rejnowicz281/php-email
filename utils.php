@@ -24,3 +24,19 @@ function formatMail($message, $phone, $first_name, $last_name, $website_type) {
         'altBody' => $altBody
     ];
 }
+
+function validateText($text) {
+    if(!isset($text)) {
+        return '';
+    }
+
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+}
+
+function validateEmail($email) {
+    if(!isset($email)) {
+        return '';
+    }
+    
+    return filter_var(validateText($email), FILTER_VALIDATE_EMAIL);
+}
